@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+
 import zero from '../assets/stars/0-stars.png'
 import one from '../assets/stars/1-stars.png'
 import two from '../assets/stars/2-stars.png'
@@ -12,16 +13,27 @@ export default class CardBack extends Component {
 
   generateRatingElement = () => {
     // implement meeeee! See the readme for instructions
+    if (!this.props.IMDBRating)  
+    return  ( <h4> {"No Rating Found"} </h4>)
+    else return (<img src={imgMapper[this.props.IMDBRating]} alt="" />)
   }
+
+  // next and hopefully final step: 
+  // get IMDBRating to appear
+  // 
+
 
   render() {
     return (
       <div className="card-back">
-        <h3 className="title"></h3>
+        <h3 className="title">{this.props.title}</h3>
         <span />
-        { /* your rating element should go here -- you can invoke methods within JSX, à la: this.myMethod() */ }
+        { /* your rating element should go here -- you can invoke methods within JSX, à la: this.myMethod() */ 
+          this.generateRatingElement() ? this.generateRatingElement() : <h4>'No Rating Found'</h4>
+
+        }
         <span />
-        <h5 className="genres"></h5>
+        <h5 className="genres">{this.props.genres.map ((genre) => genre + ', ')}</h5>
       </div>
     )
   }
